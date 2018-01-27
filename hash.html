@@ -1,0 +1,88 @@
+javascript: var fileref=document.createElement('script'); 
+fileref.setAttribute("type","text/javascript");
+fileref.setAttribute("src", "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js");
+document.body.appendChild(fileref);
+
+var hour = 16;var minutes = 59;var sec = 58;
+var i=1;
+var count=0;
+var ASIN = new Array();
+var dID = new Array();
+
+ASIN[0]="B01MT0QKAG";  
+dID[0]="8a173796";
+
+ASIN[1]="B01LYX8UPN";  
+dID[1]="aa74df47";
+
+var firstLetGo = 1;
+
+function letsGo(){
+if(firstLetGo==1)
+{
+setTimeout(function(){$(".bxc-grid__text").append("<h1 style='color:red'>Welcome to automatic cart adding script for sale of Xiaomi Redmi 4 16GB on 10th July 2017 only for <span style='color:#09a5e0'>PRIME</span> MEMBERS </H1>");},5000);
+console.log("WELCOME TO REDMI ADDING SCRIPT, FOR SALE OF XIAOMI Redmi 4 16GB on 10th July 2017 ONLY FOR PRIME MEMBERS");
+}
+firstLetGo++;
+
+
+d = new Date(); 
+h = d.getHours();
+m = d.getMinutes();
+s=d.getSeconds();
+if(h==hour && m==minutes)
+{oneMinLeft();} 
+else    { 
+console.log("Again Lets Go! at "+h+":"+m+":"+s);
+setTimeout(function(){ letsGo();},10000); 
+}}function oneMinLeft() {     if(i==1)    {   console.log("Entered One Min Block");      
+
+
+
+}
+  i++;
+d = new Date();
+n = d.getSeconds(); 
+if(n!=sec)
+{  console.log(n+" secs");
+setTimeout(function(){oneMinLeft()},100); }
+else {
+getToCart();
+}}
+
+function getToCart(){
+nCache="1234556";
+addToC();
+console.log("Script loading done!");
+}
+
+
+
+
+function addToC()
+{   
+for(nn=0;nn<ASIN.length;nn++)
+{   
+d = new Date();
+h = d.getHours(); 
+m = d.getMinutes();
+s=d.getSeconds();
+var ur = "http://www.amazon.in/gp/deal/ajax/claimDeal.html/?dealId="+dID[nn]+"&itemId="+ASIN[nn]+"&nocache="+nCache;
+var as = ASIN[nn];
+$.ajax({  
+url: ur,   
+type: "post",   
+data: "{}",
+datatype :"html",
+async : true,
+success: function(html) { 
+console.log("Tried adding "+as+" to cart at "+h+":"+m+":"+s+". \n"); 
+} 
+});
+} 
+if(count!=160)
+{         
+count++;   
+setTimeout(function(){addToC()},50);    }
+}
+letsGo();
